@@ -59,3 +59,5 @@ btn.addEventListener('click', () => {
   note.style.opacity = 1;
   setTimeout(() => (note.style.opacity = 0), 2000);
 });
+
+console.log("Привет, GitHub! Проверка пуша 🚀");
