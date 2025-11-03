@@ -1,10 +1,8 @@
-
-
 // ===== Тёмная тема с запоминанием =====
 const themeToggle = document.getElementById('themeToggle');
 
 // 1) Применяем сохранённую тему при загрузке
-(function applySavedTheme(){
+(function applySavedTheme() {
   const saved = localStorage.getItem('theme') || 'light';
   if (saved === 'dark') {
     document.documentElement.classList.add('dark');
@@ -27,18 +25,16 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Находим кнопку
+// ===== Магическая кнопка =====
 const btn = document.getElementById('magicBtn');
 
-// Создаём элемент для уведомления
 const note = document.createElement('div');
 note.textContent = '✨ Магия работает, Андрей!';
 note.className = 'note';
-
-// Настраиваем внешний вид прямо из JS
+// Немного стилей прямо здесь (без правки CSS)
 note.style.cssText = `
   position: fixed;
-  bottom: 40px;
+  bottom: 48px;
   left: 50%;
   transform: translateX(-50%);
   background: var(--accent);
@@ -48,16 +44,15 @@ note.style.cssText = `
   box-shadow: var(--shadow);
   font-size: 16px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity .3s ease;
+  z-index: 9999;
 `;
-
-// Добавляем элемент на страницу
 document.body.appendChild(note);
 
-// Слушаем клик по кнопке
 btn.addEventListener('click', () => {
   note.style.opacity = 1;
   setTimeout(() => (note.style.opacity = 0), 2000);
 });
 
-console.log("Привет, GitHub! Проверка пуша 🚀");
+// Для наглядности в DevTools
+console.log('Привет, GitHub! Переключатель темы и магия готовы ✌️');
