@@ -11,7 +11,6 @@
   --accent-2: #3b82f6;
   --shadow: 0 6px 28px rgba(2, 6, 23, 0.08);
 }
-
 .dark{
   --bg: #0f1216;
   --text: #e5e7eb;
@@ -34,11 +33,13 @@ body{
   display: flex;
   flex-direction: column;
   gap: 24px;
+  transition: background .25s ease, color .25s ease;
 }
 
 .container{
   width: min(1100px, calc(100% - 32px));
   margin: 0 auto;
+  padding: 0 0 24px;
 }
 
 /* ======= Шапка ======= */
@@ -114,7 +115,7 @@ h1{
   border-color: var(--accent-2);
 }
 .theme-switch input:checked + .slider::after{
-  left: 26px;
+  left: 26px;               /* белая точка плавно уезжает вправо — так и задумано */
   background: #f8fafc;
 }
 .theme-switch .label{ color: var(--muted); font-size: 14px; }
@@ -140,99 +141,29 @@ footer{
   color: var(--muted);
 }
 
-/* ===== БАЗА ТЕМЫ ===== */
-:root{
-  --bg: #f4f6f8;
-  --text: #0f1216;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: #e5e7eb;
-  --accent: #4caf50;
-  --shadow: 0 10px 30px rgba(0,0,0,.08);
+/* ===== Блоки изображения и видео ===== */
+.image-block, .video-block {
+  text-align: center;
+  margin: 40px auto;
+  max-width: 720px;
+}
+.image-block h2, .video-block h2 {
+  color: var(--accent);
+  margin-bottom: 16px;
 }
 
-.dark{
-  --bg: #0f1216;
-  --text: #e5e7eb;
-  --muted: #9aa4b2;
-  --card: #161b22;
-  --border: #232a34;
-  --accent: #22c55e;
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-
-html, body{ height:100% }
-body{
-  margin:0;
-  background: var(--bg);
-  color: var(--text);
-  transition: background .25s ease, color .25s ease;
-}
-
-/* Карточки и контейнер если нужно */
-.container{ max-width: 960px; margin: 0 auto; padding: 24px; }
-.card{
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: var(--shadow);
-  padding: 20px 24px;
-}
-
-/* ===== Переключатель темы ===== */
-.theme-switch{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  user-select:none;
-}
-.theme-switch input{ display:none; }
-
-.theme-switch .slider{
-  --w: 48px; --h: 28px; --knob: 22px;
-  width: var(--w);
-  height: var(--h);
-  border-radius: 999px;
-  background: var(--border);
-  position: relative;
-  transition: background .25s ease;
-  box-shadow: inset 0 0 0 1px var(--border);
-}
-.theme-switch .slider::after{
-  content:"";
-  position:absolute;
-  top: 3px; left: 3px;
-  width: var(--knob); height: var(--knob);
-  border-radius: 50%;
-  background: var(--card);
-  box-shadow: 0 2px 6px rgba(0,0,0,.2);
-  transition: transform .25s ease;
-}
-
-/* Включено */
-.theme-switch input:checked + .slider{
-  background: rgba(34,197,94,.35);
-}
-.theme-switch input:checked + .slider::after{
-  transform: translateX(20px);
-}
-.theme-switch .label{
-  font-size: 14px;
-  color: var(--muted);
-}
-
-/* ===== Кнопка ===== */
-.btn{
-  background: var(--accent);
-  color: #fff;
-  border: 0;
-  padding: 10px 18px;
+.preview {
+  width: 100%;
   border-radius: 12px;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: transform .08s ease;
+  box-shadow: 0 0 20px rgba(0,255,100,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #000;            /* чтобы при загрузке видео не мигало */
 }
-.btn:active{ transform: translateY(1px) }
+.preview:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 30px rgba(0,255,100,0.45);
+}
 
-/* Подсказка-нота (если захочешь оформить в CSS) */
-.note{ pointer-events:none; }
+/* Мелочь, чтобы кнопка не «проседала» по нажатию — используем первое правило выше */
+/* Подсказки/вспомогательные элементы */
+.note { pointer-events: none; }

@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>New Project</title>
-    <title>New Project</title>
-  <link rel="icon" href="images/hacker.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css" />
 
+  <!-- Фавикон -->
+  <link rel="icon" href="images/hacker.svg" type="image/svg+xml" />
+
+  <!-- Стили -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -28,6 +29,30 @@
 
   <main class="container">
     <section class="card">
+      <!-- Картинка -->
+      <section class="image-block">
+        <h2>Визуальное вдохновение</h2>
+        <img src="images/matrix-poster.png" alt="Матрица" class="preview" />
+
+      </section>
+
+      <!-- Видео с постером (даже без видео ошибок не будет) -->
+      <section class="video-block">
+        <h2>Видео-атмосфера</h2>
+        <video
+          class="preview"
+          controls
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="images/matrix-poster.png"
+        >
+          <source src="images/matrix-bg.mp4" type="video/mp4" />
+          Твой браузер не поддерживает видео 😅
+        </video>
+      </section>
+
       <h2>Учебные цели</h2>
       <ul>
         <li>Коммиты и пуши без страха</li>
