@@ -139,3 +139,33 @@ console.log('Привет, GitHub! Переключатель темы и маг
   `;
   document.head.appendChild(style);
 })();
+
+// Случайное приветствие в заголовке
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('greet');
+  if (!el) return;
+
+  // Определяем время суток
+  const h = new Date().getHours();
+  let part = 'Добро пожаловать';
+  if (h >= 5 && h < 12) part = 'Доброе утро';
+  else if (h >= 12 && h < 18) part = 'Добрый день';
+  else if (h >= 18 && h < 23) part = 'Добрый вечер';
+  else part = 'Ночная смена';
+
+  // Варианты приветствий
+  const list = [
+    `${part}, Андрей`,
+    'Привет, Андрей',
+    'С возвращением, Neo',
+    'Готов к новому коммиту',
+    'Поехали, капитан',
+    'Время творить магию'
+  ];
+
+  // Берём случайный
+  const text = list[Math.floor(Math.random() * list.length)];
+
+  // Ставим в заголовок (без эмодзи, эмодзи уже в разметке после span)
+  el.textContent = text;
+});
