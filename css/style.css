@@ -167,3 +167,55 @@ footer{
 /* Мелочь, чтобы кнопка не «проседала» по нажатию — используем первое правило выше */
 /* Подсказки/вспомогательные элементы */
 .note { pointer-events: none; }
+
+/* === Эффект "живой" кнопки с темами === */
+@keyframes pulse-glow-light {
+  0%   { box-shadow: 0 0 12px rgba(34,197,94,0.6), 0 0 24px rgba(34,197,94,0.3); }
+  50%  { box-shadow: 0 0 22px rgba(34,197,94,0.9), 0 0 44px rgba(34,197,94,0.5); }
+  100% { box-shadow: 0 0 12px rgba(34,197,94,0.6), 0 0 24px rgba(34,197,94,0.3); }
+}
+
+@keyframes pulse-glow-dark {
+  0%   { box-shadow: 0 0 12px rgba(96,165,250,0.6), 0 0 24px rgba(96,165,250,0.3); }
+  50%  { box-shadow: 0 0 22px rgba(96,165,250,0.9), 0 0 44px rgba(96,165,250,0.5); }
+  100% { box-shadow: 0 0 12px rgba(96,165,250,0.6), 0 0 24px rgba(96,165,250,0.3); }
+}
+
+/* Светлая тема */
+body:not(.dark) .btn {
+  animation: pulse-glow-light 3s infinite ease-in-out;
+  transition: transform 0.2s ease;
+}
+
+/* Тёмная тема */
+body.dark .btn {
+  animation: pulse-glow-dark 3s infinite ease-in-out;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: scale(1.04);
+}
+
+/* Убираем дефолтный тёмный outline у кнопки */
+.btn:focus {
+  outline: none;
+}
+
+/* Иногда в Firefox: */
+.btn:-moz-focusring {
+  outline: none;
+}
+
+/* Свой доступный фокус под тему */
+body:not(.dark) .btn:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(34,197,94,.35),   /* кольцо */
+    0 0 22px rgba(34,197,94,.55);    /* мягкое свечение */
+}
+
+body.dark .btn:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(96,165,250,.35),
+    0 0 22px rgba(96,165,250,.55);
+}
