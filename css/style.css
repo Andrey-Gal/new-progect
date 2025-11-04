@@ -1,7 +1,7 @@
 /* ===========================
    БАЗА: CSS-переменные и темы
    =========================== */
-:root{
+:root {
   --bg: #f4f6f8;
   --text: #1e293b;
   --muted: #6b7280;
@@ -11,7 +11,7 @@
   --accent-2: #3b82f6;
   --shadow: 0 6px 28px rgba(2, 6, 23, 0.08);
 }
-.dark{
+.dark {
   --bg: #0f1216;
   --text: #e5e7eb;
   --muted: #9aa4b2;
@@ -19,13 +19,17 @@
   --border: #1f2937;
   --accent: #22c55e;
   --accent-2: #60a5fa;
-  --shadow: 0 8px 36px rgba(0,0,0,.35);
+  --shadow: 0 8px 36px rgba(0, 0, 0, 0.35);
 }
 
 /* ======= Общая раскладка ======= */
-*{ box-sizing: border-box; }
-html,body{ height: 100%; }
-body{
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: var(--bg);
@@ -33,30 +37,30 @@ body{
   display: flex;
   flex-direction: column;
   gap: 24px;
-  transition: background .25s ease, color .25s ease;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
-.container{
+.container {
   width: min(1100px, calc(100% - 32px));
   margin: 0 auto;
   padding: 0 0 24px;
 }
 
 /* ======= Шапка ======= */
-header{
+header {
   text-align: center;
   padding: 56px 0 8px;
 }
-h1{
+h1 {
   margin: 0 0 8px;
   font-size: clamp(28px, 4vw, 40px);
 }
-.sub{
+.sub {
   margin: 0 0 24px;
   color: var(--muted);
 }
 
-.controls{
+.controls {
   display: flex;
   gap: 16px;
   justify-content: center;
@@ -65,7 +69,7 @@ h1{
 }
 
 /* ======= Кнопка ======= */
-.btn{
+.btn {
   background: var(--accent);
   color: #fff;
   border: 2px solid #1d7940;
@@ -74,68 +78,82 @@ h1{
   font-size: 16px;
   cursor: pointer;
   box-shadow: var(--shadow);
-  transition: transform .15s ease, filter .2s ease;
+  transition: transform 0.15s ease, filter 0.2s ease;
 }
-.btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-.btn:active{ transform: translateY(0); }
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+.btn:active {
+  transform: translateY(0);
+}
 
 /* ======= Тумблер темы ======= */
-.theme-switch{
+.theme-switch {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   user-select: none;
 }
-.theme-switch input{
+.theme-switch input {
   position: absolute;
   opacity: 0;
-  width: 0; height: 0;
+  width: 0;
+  height: 0;
 }
-.slider{
-  width: 52px; height: 28px;
+.slider {
+  width: 52px;
+  height: 28px;
   background: var(--border);
   border: 2px solid var(--border);
   border-radius: 999px;
   position: relative;
-  transition: background .2s ease;
+  transition: background 0.2s ease;
 }
-.slider::after{
+.slider::after {
   content: "";
   position: absolute;
-  top: 50%; left: 4px;
-  width: 20px; height: 20px;
+  top: 50%;
+  left: 4px;
+  width: 20px;
+  height: 20px;
   background: #fff;
   border-radius: 50%;
   transform: translateY(-50%);
-  transition: left .2s ease, background .2s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,.2);
+  transition: left 0.2s ease, background 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
-.theme-switch input:checked + .slider{
+.theme-switch input:checked + .slider {
   background: var(--accent-2);
   border-color: var(--accent-2);
 }
-.theme-switch input:checked + .slider::after{
-  left: 26px;               /* белая точка плавно уезжает вправо — так и задумано */
+.theme-switch input:checked + .slider::after {
+  left: 26px;
   background: #f8fafc;
 }
-.theme-switch .label{ color: var(--muted); font-size: 14px; }
+.theme-switch .label {
+  color: var(--muted);
+  font-size: 14px;
+}
 
 /* ======= Карточка ======= */
-.card{
+.card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
   box-shadow: var(--shadow);
 }
-.card h2{ margin-top: 0; }
-.card ul{
+.card h2 {
+  margin-top: 0;
+}
+.card ul {
   margin: 8px 0 0;
   padding-left: 18px;
 }
 
 /* ======= Подвал ======= */
-footer{
+footer {
   text-align: center;
   padding: 16px 0 32px;
   color: var(--muted);
@@ -151,127 +169,45 @@ footer{
   color: var(--accent);
   margin-bottom: 16px;
 }
-
 .preview {
   width: 100%;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,255,100,0.25);
+  box-shadow: 0 0 20px rgba(0, 255, 100, 0.25);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background: #000;            /* чтобы при загрузке видео не мигало */
+  background: #000;
 }
 .preview:hover {
   transform: scale(1.01);
-  box-shadow: 0 0 30px rgba(0,255,100,0.45);
+  box-shadow: 0 0 30px rgba(0, 255, 100, 0.45);
 }
 
-/* Мелочь, чтобы кнопка не «проседала» по нажатию — используем первое правило выше */
-/* Подсказки/вспомогательные элементы */
-.note { pointer-events: none; }
-
-/* === Эффект "живой" кнопки с темами === */
+/* === Эффект "живой" кнопки === */
 @keyframes pulse-glow-light {
-  0%   { box-shadow: 0 0 12px rgba(34,197,94,0.6), 0 0 24px rgba(34,197,94,0.3); }
-  50%  { box-shadow: 0 0 22px rgba(34,197,94,0.9), 0 0 44px rgba(34,197,94,0.5); }
+  0% { box-shadow: 0 0 12px rgba(34,197,94,0.6), 0 0 24px rgba(34,197,94,0.3); }
+  50% { box-shadow: 0 0 22px rgba(34,197,94,0.9), 0 0 44px rgba(34,197,94,0.5); }
   100% { box-shadow: 0 0 12px rgba(34,197,94,0.6), 0 0 24px rgba(34,197,94,0.3); }
 }
-
 @keyframes pulse-glow-dark {
-  0%   { box-shadow: 0 0 12px rgba(96,165,250,0.6), 0 0 24px rgba(96,165,250,0.3); }
-  50%  { box-shadow: 0 0 22px rgba(96,165,250,0.9), 0 0 44px rgba(96,165,250,0.5); }
+  0% { box-shadow: 0 0 12px rgba(96,165,250,0.6), 0 0 24px rgba(96,165,250,0.3); }
+  50% { box-shadow: 0 0 22px rgba(96,165,250,0.9), 0 0 44px rgba(96,165,250,0.5); }
   100% { box-shadow: 0 0 12px rgba(96,165,250,0.6), 0 0 24px rgba(96,165,250,0.3); }
 }
-
-/* Светлая тема */
 body:not(.dark) .btn {
   animation: pulse-glow-light 3s infinite ease-in-out;
-  transition: transform 0.2s ease;
 }
-
-/* Тёмная тема */
 body.dark .btn {
   animation: pulse-glow-dark 3s infinite ease-in-out;
-  transition: transform 0.2s ease;
 }
 
-.btn:hover {
-  transform: scale(1.04);
-}
-
-/* Убираем дефолтный тёмный outline у кнопки */
+/* === Фокус и свечение === */
 .btn:focus {
   outline: none;
 }
-
-/* Иногда в Firefox: */
-.btn:-moz-focusring {
-  outline: none;
-}
-
-/* Свой доступный фокус под тему */
 body:not(.dark) .btn:focus-visible {
-  box-shadow:
-    0 0 0 3px rgba(34,197,94,.35),   /* кольцо */
-    0 0 22px rgba(34,197,94,.55);    /* мягкое свечение */
+  box-shadow: 0 0 0 3px rgba(34,197,94,.35), 0 0 22px rgba(34,197,94,.55);
 }
-
 body.dark .btn:focus-visible {
-  box-shadow:
-    0 0 0 3px rgba(96,165,250,.35),
-    0 0 22px rgba(96,165,250,.55);
-}
-
-/* Убираем системный outline везде */
-.btn:focus { outline: none; }
-.btn:focus-visible { outline: none; }
-
-/* Светлая тема: свечение при фокусе (и клике) */
-body:not(.dark) .btn:focus,
-body:not(.dark) .btn:focus-visible {
-  box-shadow:
-    0 0 0 3px rgba(34,197,94,.35),
-    0 0 22px rgba(34,197,94,.55);
-}
-
-/* Тёмная тема: свечение при фокусе (и клике) */
-body.dark .btn:focus,
-body.dark .btn:focus-visible {
-  box-shadow:
-    0 0 0 3px rgba(96,165,250,.35),
-    0 0 22px rgba(96,165,250,.55);
-}
-
-/* светлая тема: светло-зелёная окантовка */
-body:not(.dark) .btn{ border-color: #34d399; }
-
-/* тёмная тема: полупрозрачная синяя окантовка */
-body.dark .btn{ border-color: rgba(96,165,250,.35); }
-
-/* === Мягкое «цифровое» свечение вокруг кнопки (дополнение) === */
-.btn{
-  position: relative;
-  overflow: visible;
-}
-
-/* Орёл поверх кнопки — еле заметные “частицы” */
-.btn::after{
-  content: "";
-  position: absolute;
-  inset: -12px;
-  border-radius: 18px;
-  pointer-events: none;
-  filter: blur(10px);
-  opacity: .25;
-  background:
-    radial-gradient(18px 12px at 20% 30%, rgba(34,197,94,.45), transparent 60%),
-    radial-gradient(14px 10px at 70% 60%, rgba(34,197,94,.35), transparent 60%),
-    radial-gradient(10px 8px  at 40% 80%, rgba(34,197,94,.25), transparent 60%);
-  animation: btn-drift 6s ease-in-out infinite;
-}
-
-@keyframes btn-drift{
-  0%   { transform: translateY(0) scale(1);   opacity:.22; }
-  50%  { transform: translateY(-3px) scale(1.02); opacity:.3; }
-  100% { transform: translateY(0) scale(1);   opacity:.22; }
+  box-shadow: 0 0 0 3px rgba(96,165,250,.35), 0 0 22px rgba(96,165,250,.55);
 }
 
 /* === Плавное появление цитаты дня === */
@@ -279,19 +215,13 @@ body.dark .btn{ border-color: rgba(96,165,250,.35); }
   opacity: 0;
   transform: translateY(8px);
 }
-
-/* когда добавим класс .reveal — включится анимация */
 .quote.reveal {
-  animation: quote-fade-in .6s ease-out forwards;
+  animation: quote-fade-in 0.6s ease-out forwards;
 }
-
-/* ключевые кадры */
 @keyframes quote-fade-in {
   from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-/* уважение к системной настройке "уменьшение движения" */
 @media (prefers-reduced-motion: reduce) {
   .quote { opacity: 1; transform: none; }
   .quote.reveal { animation: none; }
