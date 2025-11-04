@@ -219,3 +219,23 @@ body.dark .btn:focus-visible {
     0 0 0 3px rgba(96,165,250,.35),
     0 0 22px rgba(96,165,250,.55);
 }
+
+/* Убираем системный outline везде */
+.btn:focus { outline: none; }
+.btn:focus-visible { outline: none; }
+
+/* Светлая тема: свечение при фокусе (и клике) */
+body:not(.dark) .btn:focus,
+body:not(.dark) .btn:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(34,197,94,.35),
+    0 0 22px rgba(34,197,94,.55);
+}
+
+/* Тёмная тема: свечение при фокусе (и клике) */
+body.dark .btn:focus,
+body.dark .btn:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(96,165,250,.35),
+    0 0 22px rgba(96,165,250,.55);
+}
