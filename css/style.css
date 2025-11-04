@@ -273,3 +273,26 @@ body.dark .btn{ border-color: rgba(96,165,250,.35); }
   50%  { transform: translateY(-3px) scale(1.02); opacity:.3; }
   100% { transform: translateY(0) scale(1);   opacity:.22; }
 }
+
+/* === Плавное появление цитаты дня === */
+.quote {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* когда добавим класс .reveal — включится анимация */
+.quote.reveal {
+  animation: quote-fade-in .6s ease-out forwards;
+}
+
+/* ключевые кадры */
+@keyframes quote-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* уважение к системной настройке "уменьшение движения" */
+@media (prefers-reduced-motion: reduce) {
+  .quote { opacity: 1; transform: none; }
+  .quote.reveal { animation: none; }
+}
