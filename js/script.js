@@ -56,3 +56,86 @@ btn.addEventListener('click', () => {
 
 // Для наглядности в DevTools
 console.log('Привет, GitHub! Переключатель темы и магия готовы ✌️');
+
+// =============== ЦИТАТА ДНЯ ===============
+(() => {
+  // 1) Набор коротких цитат (можешь редактировать/добавлять)
+  const QUOTES = [
+    "Код — это лестница. Поднимайся по одной ступеньке каждый день.",
+    "Маленький коммит сегодня — большой проект завтра.",
+    "Не бойся консоли: она не кусается, она помогает.",
+    "Секрет стабильности — делать маленькие улучшения регулярно.",
+    "Тёмная тема включена, сомнения — выключены.",
+    "Ошибки — это подсказки, а не приговор.",
+    "Главное — оставить проект лучше, чем он был 5 минут назад.",
+    "Не нужно бежать марафон — достаточно идти без остановок.",
+    "Если страшно пушить — пушь чаще 😉",
+    "Сохранение — это уважение к своему будущему."
+  ];
+
+  // 2) Выберем «цитату дня» детерминированно (меняется раз в сутки)
+  const todayKey = (() => {
+    const d = new Date();
+    // номер дня в году (0..365)
+    const start = new Date(d.getFullYear(), 0, 0);
+    const diff = d - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+  })();
+  const quote = QUOTES[todayKey % QUOTES.length];
+
+  // 3) Создаём узел цитаты
+  const box = document.createElement('section');
+  box.className = 'quote-of-day';
+  box.innerHTML = `
+    <div class="q-wrap">
+      <div class="q-badge">Цитата дня</div>
+      <p class="q-text">“${quote}”</p>
+    </div>
+  `;
+
+  // 4) Вставляем в начало карточки с контентом (если есть), иначе — в <main>
+  const target =
+    document.querySelector('.card') ||
+    document.querySelector('main') ||
+    document.body;
+  target?.prepend(box);
+
+  // 5) Мини-стили добавим прямо отсюда, чтобы не править CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    .quote-of-day { margin: 12px 0 20px; }
+    .quote-of-day .q-wrap{
+      position: relative;
+      padding: 14px 16px;
+      border: 1px solid var(--border, #e5e7eb);
+      background: var(--card, #fff);
+      border-radius: 12px;
+      box-shadow: var(--shadow, 0 6px 28px rgba(2,6,23,.08));
+    }
+    .quote-of-day .q-badge{
+      position: absolute;
+      top: -10px; left: 12px;
+      padding: 2px 8px;
+      font-size: 12px;
+      border-radius: 8px;
+      background: var(--accent, #22c55e);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    }
+    .quote-of-day .q-text{
+      margin: 6px 0 0;
+      line-height: 1.45;
+      font-size: 15px;
+      color: var(--text, #1e293b);
+    }
+    @media (prefers-reduced-motion: no-preference){
+      .quote-of-day .q-wrap{ animation: q-pop .35s ease; }
+      @keyframes q-pop{
+        from{ transform: translateY(-4px); opacity: 0; }
+        to  { transform: translateY(0);    opacity: 1; }
+      }
+    }
+  `;
+  document.head.appendChild(style);
+})();
