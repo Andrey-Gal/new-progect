@@ -239,3 +239,9 @@ body.dark .btn:focus-visible {
     0 0 0 3px rgba(96,165,250,.35),
     0 0 22px rgba(96,165,250,.55);
 }
+
+/* светлая тема: светло-зелёная окантовка */
+body:not(.dark) .btn{ border-color: #34d399; }
+
+/* тёмная тема: полупрозрачная синяя окантовка */
+body.dark .btn{ border-color: rgba(96,165,250,.35); }
