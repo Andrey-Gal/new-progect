@@ -95,3 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const quote = document.querySelector('.quote-of-day');
   if (quote) requestAnimationFrame(() => quote.classList.add('reveal'));
 });
+
+// Плавное появление приветствия и подзаголовка
+document.addEventListener('DOMContentLoaded', () => {
+  const greet = document.getElementById('greet');
+  const sub   = document.querySelector('.sub');
+
+  if (greet) requestAnimationFrame(() => greet.classList.add('show'));
+  if (sub)   setTimeout(() => sub.classList.add('show'), 120);
+});

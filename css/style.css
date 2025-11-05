@@ -68,6 +68,41 @@ h1 {
   flex-wrap: wrap;
 }
 
+/* === Плавное появление приветствия и подзаголовка === */
+#greet{
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(6px) scale(.98);
+  filter: blur(1px);
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease;
+  will-change: opacity, transform;
+}
+#greet.show{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.sub{
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .6s ease .08s, transform .6s ease .08s; /* лёгкая задержка */
+}
+.sub.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Уважение к настройке "уменьшение движения" */
+@media (prefers-reduced-motion: reduce){
+  #greet, .sub{
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}
+
 /* ======= Кнопка ======= */
 .btn {
   background: var(--accent);
