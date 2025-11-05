@@ -12,7 +12,6 @@ themeToggle?.addEventListener('change', () => {
   document.documentElement.classList.toggle('dark', isDark);
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
-// Горячая клавиша Shift+D
 document.addEventListener('keydown', (e) => {
   if (e.shiftKey && (e.key === 'd' || e.key === 'в')) {
     if (!themeToggle) return;
@@ -69,7 +68,7 @@ if (btn) {
     .prepend(box);
 })();
 
-// ===== СЛУЧАЙНОЕ ПРИВЕТСТВИЕ + плавное проявление h1, .sub =====
+// ===== СЛУЧАЙНОЕ ПРИВЕТСТВИЕ + плавное проявление =====
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById('greet');
   if (el) {
@@ -83,29 +82,27 @@ document.addEventListener('DOMContentLoaded', () => {
       'Готов к новому коммиту', 'Поехали, капитан', 'Время творить магию'
     ];
     el.textContent = list[Math.floor(Math.random() * list.length)];
-    // плавное появление текста
     requestAnimationFrame(() => el.classList.add('show'));
   }
   const sub = document.querySelector('.sub');
-  if (sub) setTimeout(() => sub.classList.add('show'), 120);
+  if (sub) setTimeout(() => sub.classList.add('show'), 140);
 
-  // Плавное появление блока цитаты
   const q = document.querySelector('.quote-of-day');
   if (q) requestAnimationFrame(() => q.classList.add('reveal'));
 });
 
-// ===== ЗАГРУЗКА: фикс скролла + старт глобального fade-in + волна =====
+// ===== ЗАГРУЗКА: без «скачков» и с более поздней волной =====
 window.addEventListener('load', () => {
-  // Не даём браузеру восстанавливать старую прокрутку
+  // Не восстанавливаем старую прокрутку (особенно актуально на мобилках)
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
 
-  // Глобальное мягкое проявление страницы
+  // Мягкое проявление всей страницы
   document.body.classList.add('fade-in', 'loaded');
 
-  // Запуск анимации волны после текста
+  // Старт волны — позже и плавнее
   const wave = document.querySelector('.wave');
-  setTimeout(() => wave?.classList.add('wave-start'), 800);
+  setTimeout(() => wave?.classList.add('wave-start'), 1200);
 });
 
-console.log('Привет, GitHub! Тема/магия/цитата/анимации готовы ✌️');
+console.log('Готово: замедленные анимации, стабильная загрузка, без дёрганий.');
