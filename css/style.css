@@ -297,3 +297,22 @@ body.loaded .wave {
   40% { transform: rotate(-4deg); }
   50% { transform: rotate(10deg); }
 }
+
+/* === Анимация мягкого появления приветствия === */
+.fade-in {
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Старт волны после приветствия */
+.wave-start {
+  animation: wave-hand 2.4s ease-in-out infinite;
+}

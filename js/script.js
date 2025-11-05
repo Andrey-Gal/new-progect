@@ -109,3 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
   document.body.classList.add('loaded');
 });
+
+/* === Мягкое приветствие === */
+document.addEventListener('DOMContentLoaded', () => {
+  const greet = document.querySelector('#greet');
+  const wave = document.querySelector('.wave');
+  if (greet && wave) {
+    greet.classList.add('fade-in');
+    setTimeout(() => wave.classList.add('wave-start'), 800);
+  }
+});
