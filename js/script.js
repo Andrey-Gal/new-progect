@@ -104,3 +104,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (greet) requestAnimationFrame(() => greet.classList.add('show'));
   if (sub)   setTimeout(() => sub.classList.add('show'), 120);
 });
+
