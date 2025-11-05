@@ -316,3 +316,71 @@ body.loaded .wave {
 .wave-start {
   animation: wave-hand 2.4s ease-in-out infinite;
 }
+
+/* === 📱 Улучшенный адаптив === */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+    padding: 0 10px;
+  }
+
+  header, main, footer {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+
+  .sub {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn {
+    width: 90%;
+    font-size: 1rem;
+    padding: 12px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .quote-of-day {
+    margin: 1.4rem auto;
+    padding: 1rem;
+    max-width: 90%;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  img.preview {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  .sub { font-size: 1rem; }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .quote-of-day {
+    padding: 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+  }
+}
+/* === Конец адаптива === */
+
