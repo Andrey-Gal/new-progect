@@ -105,3 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sub)   setTimeout(() => sub.classList.add('show'), 120);
 });
 
+// ===== Плавное появление волны после загрузки =====
+window.addEventListener('load', () => {
+  document.body.classList.add('loaded');
+});

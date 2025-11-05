@@ -262,12 +262,32 @@ body.dark .btn:focus-visible {
   .quote.reveal { animation: none; }
 }
 
-/* === Анимация волны 👋 === */
+/* === Анимация волны 👋 с плавным появлением === */
 .wave {
   display: inline-block;
-  animation: wave-hand 2.4s ease-in-out infinite;
   transform-origin: 70% 70%;
+  opacity: 0;
+  animation: wave-hand 2.4s ease-in-out infinite 1s; /* 1s — задержка старта */
+  transition: opacity 0.8s ease;
 }
+
+body.loaded .wave {
+  opacity: 1;
+}
+
+/* === Подпрыгивание приветствия === */
+.greeting {
+  display: inline-block;
+  animation: greeting-bounce 2.4s ease-in-out infinite 1s;
+}
+
+@keyframes greeting-bounce {
+  0%, 100% { transform: translateY(0); }
+  10%, 30% { transform: translateY(-4px); }
+  20%, 40% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
 
 @keyframes wave-hand {
   0%, 100% { transform: rotate(0deg); }
