@@ -133,3 +133,30 @@ window.addEventListener('load', () => {
 });
 
 console.log('Готово: замедленные анимации, стабильная загрузка, без дёрганий.');
+
+/* ===== Back-to-top (под твой каркас) ===== */
+(function(){
+  const btn = document.getElementById('toTop');
+  if (!btn) return;
+
+  // лёгкий троттлинг, чтобы не дёргать отрисовку
+  const throttle = (fn, ms=120) => {
+    let t = 0;
+    return (...args) => {
+      const now = Date.now();
+      if (now - t >= ms) { t = now; fn(...args); }
+    };
+  };
+
+  const toggle = () => {
+    if (window.scrollY > 500) btn.classList.add('show');
+    else btn.classList.remove('show');
+  };
+
+  window.addEventListener('scroll', throttle(toggle));
+  window.addEventListener('load', toggle);
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
