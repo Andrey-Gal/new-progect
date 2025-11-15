@@ -85,7 +85,8 @@ if (btn) {
   const quote = QUOTES[dayOfYear % QUOTES.length];
 
   const box = document.createElement('section');
-  box.className = 'quote-of-day';
+    box.className = 'quote-of-day quote';
+
   box.innerHTML = `
     <div class="q-wrap">
       <div class="q-badge">Цитата дня</div>

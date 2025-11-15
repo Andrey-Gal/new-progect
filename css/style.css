@@ -245,6 +245,40 @@ body.dark .btn:focus-visible {
   box-shadow: 0 0 0 3px rgba(96,165,250,.35), 0 0 22px rgba(96,165,250,.55);
 }
 
+/* === Блок "Цитата дня" === */
+.quote-of-day {
+  margin: 24px auto 8px;
+  padding: 16px 20px;
+  max-width: 720px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(56,189,248,0.18), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(52,211,153,0.18), transparent 55%),
+    var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+
+.quote-of-day .q-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.quote-of-day .q-badge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.quote-of-day .q-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
 /* === Плавное появление цитаты дня === */
 .quote {
   opacity: 0;
