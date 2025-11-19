@@ -24,25 +24,6 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// ===== МАГИЧЕСКАЯ КНОПКА =====
-const btn = document.getElementById('magicBtn');
-if (btn) {
-  const note = document.createElement('div');
-  note.textContent = '✨ Магия работает, Андрей!';
-  note.className = 'note';
-  note.style.cssText = `
-    position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%);
-    background: var(--accent); color: white; padding: 12px 24px;
-    border-radius: 12px; box-shadow: var(--shadow);
-    font-size: 16px; opacity: 0; transition: opacity .3s ease; z-index: 9999;`;
-  document.body.appendChild(note);
-
-  btn.addEventListener('click', () => {
-    note.style.opacity = 1;
-    setTimeout(() => (note.style.opacity = 0), 2000);
-  });
-}
-
 // ===== ЦИТАТА ДНЯ =====
 (() => {
   const QUOTES = [
@@ -101,8 +82,9 @@ if (btn) {
     .prepend(box);
 })();
 
-// ===== СЛУЧАЙНОЕ ПРИВЕТСТВИЕ + scroll-reveal =====
+// ===== СЛУЧАЙНОЕ ПРИВЕТСТВИЕ + scroll-reveal + МАГИЧЕСКАЯ КНОПКА =====
 document.addEventListener('DOMContentLoaded', () => {
+  // Приветствие
   const el = document.getElementById('greet');
   if (el) {
     const h = new Date().getHours();
@@ -125,13 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => el.classList.add('show'));
   }
 
+  // Подзаголовок
   const sub = document.querySelector('.sub');
   if (sub) setTimeout(() => sub.classList.add('show'), 140);
 
+  // Появление «Цитаты дня»
   const q = document.querySelector('.quote-of-day');
   if (q) requestAnimationFrame(() => q.classList.add('reveal'));
 
-  // === Scroll-reveal для секций ===
+  // Scroll-reveal для секций
   const revealEls = document.querySelectorAll('.scroll-reveal');
   if (revealEls.length) {
     if ('IntersectionObserver' in window) {
@@ -149,9 +133,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
       revealEls.forEach((el) => io.observe(el));
     } else {
-      // fallback: если браузер старый — сразу показываем блоки
       revealEls.forEach((el) => el.classList.add('visible'));
     }
+  }
+
+  // ===== МАГИЧЕСКАЯ КНОПКА =====
+  const magicBtn = document.getElementById('magicBtn');
+  if (magicBtn) {
+    let note = null;
+
+    magicBtn.addEventListener('click', () => {
+      // Создаём тост один раз
+      if (!note) {
+        note = document.createElement('div');
+        note.textContent = '✨ Магия работает, Андрей!';
+        note.className = 'magic-note';
+        note.style.cssText = `
+          position: fixed;
+          bottom: 120px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--accent);
+          color: #ffffff;
+          padding: 12px 24px;
+          border-radius: 12px;
+          box-shadow: var(--shadow);
+          font-size: 16px;
+          opacity: 0;
+          transition: opacity .3s ease;
+          z-index: 9999;
+        `;
+        document.body.appendChild(note);
+      }
+
+      note.style.opacity = 1;
+      setTimeout(() => {
+        if (note) note.style.opacity = 0;
+      }, 2000);
+    });
   }
 });
 
@@ -170,8 +189,8 @@ console.log('Готово: замедленные анимации, стабил
 
 /* ===== Кнопка "Наверх" ===== */
 (function () {
-  const btn = document.getElementById('toTop');
-  if (!btn) return;
+  const topBtn = document.getElementById('toTop');
+  if (!topBtn) return;
 
   const throttle = (fn, ms = 120) => {
     let t = 0;
@@ -185,14 +204,14 @@ console.log('Готово: замедленные анимации, стабил
   };
 
   const toggle = () => {
-    if (window.scrollY > 500) btn.classList.add('show');
-    else btn.classList.remove('show');
+    if (window.scrollY > 500) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
   };
 
   window.addEventListener('scroll', throttle(toggle));
   window.addEventListener('load', toggle);
 
-  btn.addEventListener('click', () => {
+  topBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 })();
