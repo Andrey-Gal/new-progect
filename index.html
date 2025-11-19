@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>New Project</title>
 
-  <!-- Фавикон -->
   <link rel="icon" href="images/hacker.svg" type="image/svg+xml" />
-
-  <!-- Стили -->
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
 </head>
 <body>
   <header class="container">
@@ -17,7 +14,6 @@
       <span class="greeting" id="greet">Привет, Андрей</span>
       <span class="wave">👋</span>
     </h1>
-
     <p class="sub">Твой новый фронтенд-проект готов к старту!</p>
 
     <div class="controls">
@@ -32,32 +28,12 @@
   </header>
 
   <main class="container">
-    <section class="card">
-      <!-- Картинка -->
+    <!-- Основная карточка с матрицей и учебными целями -->
+    <section class="card scroll-reveal">
       <section class="image-block">
         <h2>Визуальное вдохновение</h2>
         <img src="images/matrix-poster.png" alt="Матрица" class="preview" />
       </section>
-
-      <!-- ======== ВИДЕО ВРЕМЕННО ОТКЛЮЧЕНО ======== -->
-      <!--
-      <section class="video-block">
-        <h2>Видео-атмосфера</h2>
-        <video
-          class="preview"
-          controls
-          autoplay
-          muted
-          loop
-          playsinline
-          poster="images/matrix-poster.png"
-        >
-          <source src="images/matrix-bg.mp4" type="video/mp4" />
-          Твой браузер не поддерживает видео 😅
-        </video>
-      </section>
-      -->
-      <!-- ======== КОНЕЦ ОТКЛЮЧЕННОГО ВИДЕО ======== -->
 
       <h2>Учебные цели</h2>
       <ul>
@@ -66,6 +42,45 @@
         <li>Вежливый JavaScript с сохранением настроек</li>
       </ul>
     </section>
+
+    <!-- Блок «О проекте» -->
+    <section class="card about scroll-reveal">
+      <h2>О проекте</h2>
+      <p><strong>Этот сайт — твой личный тренажёр.</strong></p>
+      <p>Здесь ты спокойно тренируешь HTML, CSS, JavaScript и работу с Git, шаг за шагом, без спешки и паники.</p>
+      <p>Каждое небольшое изменение — это плюс к навыкам: сверстать блок, настроить тему, добавить эффект, сделать коммит.</p>
+      <p>Проект специально простой и аккуратный, чтобы в коде не было каши и всегда было понятно, что и зачем сделано.</p>
+    </section>
+
+    <!-- Блок «Навыки» -->
+    <section class="skills scroll-reveal">
+      <h2>Навыки, которые я прокачиваю</h2>
+      <div class="skills-grid">
+        <article class="skill-card">
+          <div class="tag">💻 HTML</div>
+          <h3>Структура страницы</h3>
+          <p>Заголовки, параграфы, списки, кнопки и семантика — основа любого интерфейса.</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="tag">🎨 CSS</div>
+          <h3>Внешний вид и темы</h3>
+          <p>Переменные, карточки, адаптивность и тёмная тема — чтобы сайт выглядел современно.</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="tag">⚙️ JavaScript</div>
+          <h3>Живое поведение</h3>
+          <p>Анимации, кнопка «наверх», цитата дня и бережное обращение с настройками пользователя.</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="tag">🧱 Git & GitHub</div>
+          <h3>Контроль версий</h3>
+          <p>Честные коммиты, пуши без страха и зелёные квадратики в профиле.</p>
+        </article>
+      </div>
+    </section>
   </main>
 
   <footer class="container">
@@ -73,7 +88,6 @@
   </footer>
 
   <button id="toTop" class="to-top" aria-label="Наверх" title="Наверх">▲</button>
-
-  <script src="js/script.js"></script>
+  <script src="js/script.js?v=3"></script>
 </body>
 </html>
