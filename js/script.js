@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ===== МАГИЧЕСКАЯ КНОПКА =====
+  // ===== МАГИЧЕСКАЯ КНОПКА (ТОСТ РЯДОМ С КНОПКОЙ) =====
   const magicBtn = document.getElementById('magicBtn');
   if (magicBtn) {
     let note = null;
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         note.className = 'magic-note';
         note.style.cssText = `
           position: fixed;
-          bottom: 120px;
+          top: 0;
           left: 50%;
           transform: translateX(-50%);
           background: var(--accent);
@@ -165,6 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         document.body.appendChild(note);
       }
+
+      // Привязываем позицию к кнопке
+      const rect = magicBtn.getBoundingClientRect();
+      const desiredTop = rect.bottom + 12; // чуть ниже кнопки
+      const safeTop = Math.min(desiredTop, window.innerHeight - 80); // чтобы не вываливалось за край
+
+      note.style.top = `${safeTop}px`;
+      note.style.left = `${rect.left + rect.width / 2}px`;
 
       note.style.opacity = 1;
       setTimeout(() => {
