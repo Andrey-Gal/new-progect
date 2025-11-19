@@ -1,6 +1,4 @@
-/* ===========================
-   БАЗА: CSS-переменные и темы
-   =========================== */
+
 :root {
   --bg: #f4f6f8;
   --text: #1e293b;
@@ -24,26 +22,25 @@
 }
 
 /* ======= Общая раскладка ======= */
-
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
 html,
 body {
   min-height: 100%;
-  height: auto;
 }
 
+/* ВСЕ стили body собраны в ОДНОМ месте,
+   чтобы не было дублей и ошибок структуры */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
+  gap: 24px;
 
-  /* плавное появление всей страницы */
+  /* плавное появление страницы */
   opacity: 0;
   transform: translateY(10px);
   transition:
@@ -58,6 +55,7 @@ body.fade-in {
   transform: translateY(0);
 }
 
+/* Контейнер */
 .container {
   width: min(1100px, calc(100% - 32px));
   margin: 0 auto;
@@ -65,60 +63,54 @@ body.fade-in {
 }
 
 /* ======= Шапка ======= */
-
 header {
   text-align: center;
   padding: 56px 0 8px;
 }
 
 h1 {
-  position: relative;
   margin: 0 0 8px;
   font-size: clamp(28px, 4vw, 40px);
-
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  position: relative; /* для ушек */
+  display: inline-block;
 }
 
-/* «ушки Нео» вокруг заголовка */
+/* Ушки Нео — аккуратные светящиеся полоски */
 h1::before,
 h1::after {
   content: "";
   position: absolute;
   top: 50%;
-  width: 22px;
-  height: 44px;
+  width: 6px;
+  height: 36px;
   border-radius: 999px;
   transform: translateY(-50%);
-  opacity: 0.25;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(34, 197, 94, 0) 0%,
-      rgba(34, 197, 94, 0.9) 50%,
-      rgba(34, 197, 94, 0) 100%
-    );
+  opacity: 0.45;
+  background: linear-gradient(
+    to bottom,
+    rgba(34, 197, 94, 0) 0%,
+    rgba(34, 197, 94, 0.8) 50%,
+    rgba(34, 197, 94, 0) 100%
+  );
   pointer-events: none;
 }
 
 h1::before {
-  left: -30px;
+  left: -18px;
 }
 
 h1::after {
-  right: -30px;
+  right: -18px;
 }
 
 .dark h1::before,
 .dark h1::after {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(96, 165, 250, 0) 0%,
-      rgba(96, 165, 250, 0.9) 50%,
-      rgba(96, 165, 250, 0) 100%
-    );
+  background: linear-gradient(
+    to bottom,
+    rgba(96, 165, 250, 0) 0%,
+    rgba(96, 165, 250, 0.8) 50%,
+    rgba(96, 165, 250, 0) 100%
+  );
 }
 
 .sub {
@@ -127,7 +119,6 @@ h1::after {
 }
 
 /* ======= Блок с кнопками ======= */
-
 .controls {
   display: flex;
   gap: 16px;
@@ -137,16 +128,12 @@ h1::after {
 }
 
 /* === Плавное появление приветствия и подзаголовка === */
-
 #greet {
   display: inline-block;
   opacity: 0;
   transform: translateY(6px) scale(0.98);
   filter: blur(1px);
-  transition:
-    opacity 0.6s ease,
-    transform 0.6s ease,
-    filter 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
   will-change: opacity, transform;
 }
 
@@ -159,9 +146,7 @@ h1::after {
 .sub {
   opacity: 0;
   transform: translateY(6px);
-  transition:
-    opacity 0.6s ease 0.08s,
-    transform 0.6s ease 0.08s;
+  transition: opacity 0.6s ease 0.08s, transform 0.6s ease 0.08s;
 }
 
 .sub.show {
@@ -170,7 +155,6 @@ h1::after {
 }
 
 /* Уважение к настройке "уменьшение движения" */
-
 @media (prefers-reduced-motion: reduce) {
   #greet,
   .sub {
@@ -181,10 +165,8 @@ h1::after {
   }
 }
 
-/* ======= Кнопки ======= */
-
-.btn,
-.magic-btn {
+/* ======= Кнопка ======= */
+.btn {
   background: var(--accent);
   color: #fff;
   border: 2px solid #1d7940;
@@ -193,56 +175,43 @@ h1::after {
   font-size: 16px;
   cursor: pointer;
   box-shadow: var(--shadow);
-  transition:
-    transform 0.15s ease,
-    filter 0.2s ease,
-    background 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, filter 0.2s ease;
+  -webkit-appearance: none;
 }
 
-.btn:hover,
-.magic-btn:hover {
+.btn:hover {
   transform: translateY(-1px);
   filter: brightness(1.02);
 }
 
-.btn:active,
-.magic-btn:active {
+.btn:active {
   transform: translateY(0);
 }
 
-/* отдельный вид для "Магия работает, Андрей!" */
-
-.magic-btn {
-  margin-top: 16px;
+/* ======= Магическая подпись под кнопкой ======= */
+.magic-note {
+  margin-top: 12px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #ffffff;
   font-size: 14px;
-  padding: 10px 22px;
-  background: linear-gradient(90deg, #16a34a, #22c55e);
-  border-color: #15803d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   opacity: 0;
+  transform: translateY(-4px);
   pointer-events: none;
-  transform: translateY(4px);
-  transition:
-    opacity 0.25s ease-out,
-    transform 0.25s ease-out;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.magic-btn.show {
+.magic-note.show {
   opacity: 1;
-  pointer-events: auto;
   transform: translateY(0);
-}
-
-/* убираем странные фокусы-кружочки */
-
-button:focus,
-button:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
 }
 
 /* ======= Тумблер темы ======= */
-
 .theme-switch {
   display: inline-flex;
   align-items: center;
@@ -264,8 +233,7 @@ button:focus-visible {
   border: 2px solid var(--border);
   border-radius: 999px;
   position: relative;
-  transition: background 0.2s ease, border-color 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease;
 }
 
 .slider::after {
@@ -278,7 +246,7 @@ button:focus-visible {
   background: #fff;
   border-radius: 50%;
   transform: translateY(-50%);
-  transition: left 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  transition: left 0.2s ease, background 0.2s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -297,8 +265,7 @@ button:focus-visible {
   font-size: 14px;
 }
 
-/* ======= Карточки ======= */
-
+/* ======= Карточка ======= */
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -317,7 +284,6 @@ button:focus-visible {
 }
 
 /* ======= Подвал ======= */
-
 footer {
   text-align: center;
   padding: 16px 0 32px;
@@ -325,7 +291,6 @@ footer {
 }
 
 /* ===== Блоки изображения и видео ===== */
-
 .image-block,
 .video-block {
   text-align: center;
@@ -353,7 +318,6 @@ footer {
 }
 
 /* === Блок "Цитата дня" === */
-
 .quote-of-day {
   margin: 24px auto 8px;
   padding: 16px 20px;
@@ -387,8 +351,7 @@ footer {
   line-height: 1.6;
 }
 
-/* === Анимация цитаты (если вдруг используется .quote) === */
-
+/* === Анимация цитаты === */
 .quote {
   opacity: 0;
   transform: translateY(8px);
@@ -421,7 +384,6 @@ footer {
 }
 
 /* === Анимация волны 👋 и подпрыгивание приветствия === */
-
 .wave {
   display: inline-block;
   transform-origin: 70% 70%;
@@ -479,8 +441,47 @@ body.loaded .wave {
   }
 }
 
-/* === Scroll-reveal для блоков === */
+/* === Эффект "живой" кнопки === */
+@keyframes pulse-glow-light {
+  0% {
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.6), 0 0 24px rgba(34, 197, 94, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(34, 197, 94, 0.9), 0 0 44px rgba(34, 197, 94, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.6), 0 0 24px rgba(34, 197, 94, 0.3);
+  }
+}
 
+@keyframes pulse-glow-dark {
+  0% {
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.6), 0 0 24px rgba(96, 165, 250, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(96, 165, 250, 0.9), 0 0 44px rgba(96, 165, 250, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(96, 165, 250, 0.6), 0 0 24px rgba(96, 165, 250, 0.3);
+  }
+}
+
+body:not(.dark) .btn {
+  animation: pulse-glow-light 3s infinite ease-in-out;
+}
+
+body.dark .btn {
+  animation: pulse-glow-dark 3s infinite ease-in-out;
+}
+
+/* === Фокус/outline — убираем зелёные кружочки браузера === */
+button:focus,
+button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* === Scroll-reveal для блоков === */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(12px);
@@ -501,7 +502,6 @@ body.loaded .wave {
 }
 
 /* === Блок "О проекте" === */
-
 .about {
   margin-top: 24px;
 }
@@ -517,7 +517,6 @@ body.loaded .wave {
 }
 
 /* === Блок "Навыки" === */
-
 .skills {
   margin-top: 24px;
   padding: 24px 20px 28px;
@@ -547,10 +546,7 @@ body.loaded .wave {
     radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.06), transparent 55%),
     var(--card);
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .skill-card h3 {
@@ -580,12 +576,10 @@ body.loaded .wave {
   box-shadow: 0 10px 26px rgba(37, 99, 235, 0.18);
 }
 
-/* === 📱 Адаптив === */
-
+/* === 📱 Улучшенный адаптив === */
 @media (max-width: 768px) {
   body {
     font-size: 15px;
-    padding: 0 10px;
   }
 
   header,
@@ -606,21 +600,20 @@ body.loaded .wave {
   }
 
   .btn {
-    width: 90%;
+    width: 100%;
     font-size: 1rem;
     padding: 12px;
     margin: 0 auto;
     display: block;
   }
 
-  .magic-btn {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+  .magic-note {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .quote-of-day {
-    max-width: 90%;
+    max-width: 100%;
   }
 
   img.preview {
@@ -628,6 +621,10 @@ body.loaded .wave {
     height: auto;
     border-radius: 14px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  }
+
+  .container {
+    width: calc(100% - 24px);
   }
 }
 
@@ -640,29 +637,18 @@ body.loaded .wave {
     font-size: 1rem;
   }
 
-  .btn,
-  .magic-btn {
-    width: 100%;
-    padding: 12px;
-  }
-
   footer p {
     font-size: 0.8rem;
     opacity: 0.8;
   }
-
-  h1::before,
-  h1::after {
-    display: none; /* на очень маленьких экранах уберём ушки, чтобы не мешались */
-  }
 }
 
 /* ===== Кнопка "Наверх" ===== */
-
 .to-top {
   position: fixed;
   right: 24px;
   bottom: 24px;
+  top: auto;
   width: 48px;
   height: 48px;
   display: grid;
@@ -691,7 +677,8 @@ body.loaded .wave {
 }
 
 .to-top:focus {
-  outline: none;
+  outline: 2px solid #7aa2ff;
+  outline-offset: 2px;
 }
 
 .to-top.show {
