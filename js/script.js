@@ -5,56 +5,43 @@ const themeToggle = document.getElementById('themeToggle');
   const saved = localStorage.getItem('theme') || 'light';
   if (saved === 'dark') {
     document.documentElement.classList.add('dark');
-    if (themeToggle) {
-      themeToggle.checked = true;
-    }
+    if (themeToggle) themeToggle.checked = true;
   }
 })();
 
-if (themeToggle) {
-  themeToggle.addEventListener('change', () => {
-    const isDark = themeToggle.checked;
-    document.documentElement.classList.toggle('dark', isDark);
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
-}
+themeToggle?.addEventListener('change', () => {
+  const isDark = themeToggle.checked;
+  document.documentElement.classList.toggle('dark', isDark);
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
 
 // Горячая клавиша Shift + D / В для переключения темы
 document.addEventListener('keydown', (e) => {
-  if (!e.shiftKey) return;
-  if (e.key === 'd' || e.key === 'в' || e.key === 'D' || e.key === 'В') {
+  if (e.shiftKey && (e.key === 'd' || e.key === 'в')) {
     if (!themeToggle) return;
     themeToggle.checked = !themeToggle.checked;
     themeToggle.dispatchEvent(new Event('change'));
   }
 });
 
-// ===== МАГИЧЕСКАЯ КНОПКА (магия рядом с кнопкой) =====
-const magicBtn = document.getElementById('magicBtn');
+// ===== МАГИЧЕСКАЯ КНОПКА (подпись рядом с кнопкой) =====
+(function () {
+  const magicBtn = document.getElementById('magicBtn');
+  if (!magicBtn) return;
 
-if (magicBtn) {
-  const magicToast = document.createElement('button');
-  magicToast.type = 'button';
-  magicToast.className = 'magic-btn';
-  magicToast.textContent = '✨ Магия работает, Андрей!';
-  magicToast.setAttribute('aria-hidden', 'true');
-
-  // вставляем сразу под основную кнопку
-  magicBtn.insertAdjacentElement('afterend', magicToast);
-
-  let hideTimer = null;
+  const note = document.createElement('div');
+  note.className = 'magic-note';
+  note.textContent = '✨ Магия работает, Андрей!';
+  magicBtn.insertAdjacentElement('afterend', note);
 
   magicBtn.addEventListener('click', () => {
-    magicToast.classList.add('show');
-    if (hideTimer) clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-      magicToast.classList.remove('show');
-    }, 2200);
+    note.classList.add('show');
+    setTimeout(() => note.classList.remove('show'), 2000);
   });
-}
+})();
 
 // ===== ЦИТАТА ДНЯ =====
-(function quoteOfDay() {
+(() => {
   const QUOTES = [
     'Код — это лестница. Поднимайся по одной ступеньке каждый день.',
     'Маленький коммит сегодня — большой проект завтра.',
@@ -91,7 +78,7 @@ if (magicBtn) {
     'IDE не спасёт, если мозг не в проекте. 🧠',
     'Каждая точка с запятой — след твоего опыта. ;',
     'Когда свет монитора освещает ночь — значит, ты на верном пути. 🌙',
-    'Главное — не закончить, а не сдаться. 🛠️',
+    'Главное — не закончить, а не сдаться. 🛠️'
   ];
 
   const d = new Date();
@@ -103,33 +90,24 @@ if (magicBtn) {
   box.className = 'quote-of-day scroll-reveal';
   box.innerHTML = `
     <div class="q-wrap">
-      <div class="q-badge">Цитата дня</div>
+      <div class="q-badge">ЦИТАТА ДНЯ</div>
       <p class="q-text">“${quote}”</p>
-    </div>
-  `;
+    </div>`;
 
-  const target =
-    document.querySelector('.card') ||
-    document.querySelector('main') ||
-    document.body;
-
-  target.prepend(box);
+  (document.querySelector('.card') || document.querySelector('main') || document.body)
+    .prepend(box);
 })();
 
 // ===== СЛУЧАЙНОЕ ПРИВЕТСТВИЕ + scroll-reveal =====
 document.addEventListener('DOMContentLoaded', () => {
-  const greetEl = document.getElementById('greet');
-
-  if (greetEl) {
+  const el = document.getElementById('greet');
+  if (el) {
     const h = new Date().getHours();
     const part =
-      h >= 5 && h < 12
-        ? 'Доброе утро'
-        : h >= 12 && h < 18
-          ? 'Добрый день'
-          : h >= 18 && h < 23
-            ? 'Добрый вечер'
-            : 'Ночная смена';
+      h >= 5 && h < 12 ? 'Доброе утро' :
+      h >= 12 && h < 18 ? 'Добрый день' :
+      h >= 18 && h < 23 ? 'Добрый вечер' :
+      'Ночная смена';
 
     const list = [
       `${part}, Андрей`,
@@ -137,93 +115,74 @@ document.addEventListener('DOMContentLoaded', () => {
       'С возвращением, Neo',
       'Готов к новому коммиту',
       'Поехали, капитан',
-      'Время творить магию',
+      'Время творить магию'
     ];
 
-    greetEl.textContent = list[Math.floor(Math.random() * list.length)];
-    requestAnimationFrame(() => greetEl.classList.add('show'));
+    el.textContent = list[Math.floor(Math.random() * list.length)];
+    requestAnimationFrame(() => el.classList.add('show'));
   }
 
   const sub = document.querySelector('.sub');
-  if (sub) {
-    setTimeout(() => sub.classList.add('show'), 140);
-  }
+  if (sub) setTimeout(() => sub.classList.add('show'), 140);
 
-  const quoteBox = document.querySelector('.quote-of-day');
-  if (quoteBox) {
-    requestAnimationFrame(() => quoteBox.classList.add('reveal'));
-  }
+  const q = document.querySelector('.quote-of-day');
+  if (q) requestAnimationFrame(() => q.classList.add('reveal'));
 
   // === Scroll-reveal для секций ===
   const revealEls = document.querySelectorAll('.scroll-reveal');
-  if (!revealEls.length) return;
+  if (revealEls.length) {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
 
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.18 }
-    );
-
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    // fallback для старых браузеров
-    revealEls.forEach((el) => el.classList.add('visible'));
+      revealEls.forEach((el) => io.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('visible'));
+    }
   }
 });
 
 // ===== ЗАГРУЗКА: без «скачков» =====
 window.addEventListener('load', () => {
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
 
   document.body.classList.add('fade-in', 'loaded');
-
-  const wave = document.querySelector('.wave');
-  setTimeout(() => {
-    if (wave) {
-      wave.classList.add('wave-start');
-    }
-  }, 1200);
 });
 
-console.log(
-  'Готово: темы, магия рядом с кнопкой, цитата дня, ушки Нео и кнопка наверх.'
-);
+console.log('Готово: тема, магия, цитата, скролл, ушки.');
 
 // ===== Кнопка "Наверх" =====
-(function initToTop() {
+(function () {
   const topBtn = document.getElementById('toTop');
   if (!topBtn) return;
 
   const throttle = (fn, ms = 120) => {
-    let last = 0;
+    let t = 0;
     return (...args) => {
       const now = Date.now();
-      if (now - last >= ms) {
-        last = now;
+      if (now - t >= ms) {
+        t = now;
         fn(...args);
       }
     };
   };
 
   const toggle = () => {
-    if (window.scrollY > 500) {
-      topBtn.classList.add('show');
-    } else {
-      topBtn.classList.remove('show');
-    }
+    if (window.scrollY > 500) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
   };
 
-  window.addEventListener('scroll', throttle(toggle, 120));
+  window.addEventListener('scroll', throttle(toggle));
   window.addEventListener('load', toggle);
 
   topBtn.addEventListener('click', () => {
